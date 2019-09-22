@@ -1,46 +1,35 @@
 package pack;
 
-public class ArrayUtil {
+public class ArrayModel {
 
-    private int size;
+    private int     size;
     private short[] arr;
 
-    public ArrayUtil() {
+    public ArrayModel() {
         this.size = 0;
     }
 
-    public ArrayUtil(int size) {
+    public ArrayModel(int size) {
         this.arr  = new short[size];
         this.size = size;
     }
 
-    public ArrayUtil(short[] arr) {
+    public ArrayModel(short[] arr) {
         this.arr  = arr;
         this.size = arr.length;
     }
 
-    public int size() {
+    public int getSize() {
         return this.size;
     }
 
     public void setSize(int size) {
+        this.arr  = new short[size];
         this.size = size;
     }
-
-    public void show() {
-        for (int value : arr) {
-            System.out.print(value + " ");
-        }
-
-        System.out.println();
-    }
-
-    public void showReverse() {
-        for (int i = arr.length-1; i >= 0; i--) {
-            System.out.print(arr[i] + " ");
-        }
-
-        System.out.println();
+    
+    public short[] getModel() {
+        return this.arr;
     }
 
     public void fill(int a, int b) {
