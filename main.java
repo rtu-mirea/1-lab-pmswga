@@ -34,6 +34,10 @@ class MyPerson {
         return this.group;
     }
 
+    public toString() {
+        return this.initials + ", " + this.group;
+    }
+
 }
 
 class MainClass {
