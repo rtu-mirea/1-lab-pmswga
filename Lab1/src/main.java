@@ -1,7 +1,5 @@
 import pack.*;
-
 import java.util.Scanner;
-import java.util.Scanner.*;
 
 class MainController {
 
