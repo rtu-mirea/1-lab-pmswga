@@ -1,5 +1,7 @@
 package pack;
 
+import java.util.Scanner;
+
 public class ArrayModel {
 
     private int     size;
@@ -39,9 +41,11 @@ public class ArrayModel {
     }
 
     public void input() {
+        Scanner input = new Scanner(System.in);
+
         for (int i = 0; i < arr.length; i++) {
             System.out.print("Enter value [" + i + "]: ");
-            arr[i] = Short.parseShort(System.console().readLine());
+            arr[i] = input.nextShort();
         }
     }
 

@@ -38,7 +38,7 @@ class MainController {
         view.view();
         
         System.out.print("Enter value: ");
-        value = Short.parseShort( input.nextLine() );
+        value = input.nextShort();
 
         System.out.println("Count of elements more than " + value + " = " + model.getCount((short)value));
 
