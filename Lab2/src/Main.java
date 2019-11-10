@@ -43,13 +43,31 @@ public class Main {
         try {
             if (file.exists()) {
                 if (file.canRead()) {
+                    String text = "";
                     List<String> lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
 
-                    Task1 task1 = new Task1(lines);
+                    for (String line : lines) {
+                        text = text.concat(line);
+                    }
+
+                    Task1 task1 = new Task1(text);
 
                     System.out.println("Count sales: " + Integer.toString(task1.getCountSales()));
-                    System.out.println("Total price: " + Integer.toString(task1.getTotalPrice()));
+                    System.out.println("Total price: " + Integer.toString(task1.getTotalPrice()) + " RUB");
+                    System.out.print("Rating of goods: ");
                     System.out.println(task1.getRatingAsString());
+
+                    Scanner input = new Scanner(System.in);
+                    int saleId = 0;
+
+                    System.out.print("Enter sale id (1, 100): ");
+                    saleId = input.nextInt();
+
+                    if (saleId > 0 && saleId < task1.getCountSales()) {
+                        System.out.println("Sale #" + Integer.toString(saleId) + " is " + task1.getSaleByID(saleId));
+                    }
+
+                    input.close();
                 }
             } else {
                 System.out.println("File not exists");

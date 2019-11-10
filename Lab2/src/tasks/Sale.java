@@ -23,6 +23,6 @@ public class Sale {
 
     @Override
     public String toString() {
-        return "Product: " + this.productName + ", " + price;
+        return "Product: " + this.productName + ", " + price + " RUB";
     }
 }
