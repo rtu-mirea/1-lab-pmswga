@@ -30,7 +30,7 @@ public class HorseListInterface {
                 id++;
             }
 
-            System.out.println("+----+----------+-----------+");
+            System.out.println("+----+-----------+");
         } else {
             System.out.print("Horses list is empty");
         }

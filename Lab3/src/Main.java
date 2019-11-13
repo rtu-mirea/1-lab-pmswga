@@ -1,10 +1,12 @@
 
 import Totalizator.HorseBase;
+import Totalizator.Parlay;
 import Totalizator.ParlaysBase;
 import Users.*;
 import Interface.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -37,8 +39,19 @@ class Main {
             parlayListInterface = new ParlayListInterface(Main.parlaysBase.getParlaysByUser(currentUser.getLogin()));
             parlayListInterface.view();
         } else if (currentUser.isAdmin()) {
-            parlayListInterface = new ParlayListInterface(Main.parlaysBase.getAllParlays());
-            parlayListInterface.view();
+            for (User user : usersBase.getUsers()) {
+
+                ArrayList<Parlay> parlays = Main.parlaysBase.getParlaysByUser(user.getLogin());
+
+                if (!parlays.isEmpty()) {
+                    System.out.println("Parlays of user: " + user.getLogin());
+                    parlayListInterface = new ParlayListInterface(parlays);
+                    parlayListInterface.view();
+                } else {
+                    System.out.println("Parlays list is empty for user: " + user.getLogin());
+                }
+
+            }
         }
     }
 
@@ -78,6 +91,15 @@ class Main {
         System.out.println("Parlay added successfully!");
     }
 
+    static private void addHorseInterface() {
+        AddHorseInterface addHorseInterface = new AddHorseInterface();
+        addHorseInterface.view();
+
+        horseBase.addHorse(addHorseInterface.getAddedHorse());
+
+        System.out.println("Horse added successfully!");
+    }
+
     static public void main(String args[]) {
         Main.fillUserList();
 
@@ -95,7 +117,7 @@ class Main {
                 System.out.println("2. Add parlay");
                 System.out.println("3. List of parlays");
                 System.out.println("4. List of horses");
-                System.out.println("5. Exit");
+                System.out.println("5. Logout");
             } else if (Main.currentUser.isAdmin()) {
                 System.out.println("[User: " + currentUser.getName() + "]");
                 System.out.println("1. Start race");
@@ -103,7 +125,7 @@ class Main {
                 System.out.println("3. List of parlays");
                 System.out.println("4. List of horses");
                 System.out.println("5. List of users");
-                System.out.println("6. Exit");
+                System.out.println("6. Logout");
             }
 
             if (input.hasNextInt()) {
@@ -158,7 +180,7 @@ class Main {
 
                     } break;
                     case 2: {
-
+                        Main.addHorseInterface();
                     } break;
                     case 3: {
                         Main.parlayListInterface();

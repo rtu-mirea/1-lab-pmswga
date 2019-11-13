@@ -8,7 +8,7 @@ public class ParlayListInterface {
     private ArrayList<Parlay> parlays;
 
     public ParlayListInterface(ArrayList<Parlay> parlays) {
-        this.parlays   = parlays;
+        this.parlays = parlays;
     }
 
     public void view() {
@@ -34,9 +34,7 @@ public class ParlayListInterface {
 
             System.out.println("+----+----------+-----------+");
         } else {
-            System.out.print("You don't have parlays");
+            System.out.print("List parlays is empty");
         }
-
     }
-
 }

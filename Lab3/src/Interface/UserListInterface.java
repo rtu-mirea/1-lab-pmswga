@@ -16,8 +16,7 @@ public class UserListInterface {
 
         System.out.println("+[id]+--[Name]--+--[Login]--+");
 
-        for (String key : this.usersBase.getUsers().keySet()) {
-            User user = this.usersBase.getUser(key);
+        for (User user : this.usersBase.getUsers()) {
             System.out.print("|");
             System.out.format("%-4s", Integer.toString(id));
             System.out.print("|");

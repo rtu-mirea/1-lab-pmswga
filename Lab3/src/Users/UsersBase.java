@@ -1,5 +1,6 @@
 package Users;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,8 +16,14 @@ public class UsersBase {
         this.users.put(user.getLogin(), user);
     }
 
-    public Map<String, User> getUsers() {
-        return this.users;
+    public ArrayList<User> getUsers() {
+        ArrayList<User> userList = new ArrayList<User>();
+
+        for (String userName : this.users.keySet()) {
+            userList.add(this.users.get(userName));
+        }
+
+        return userList;
     }
 
     public User getUser(String login) {
