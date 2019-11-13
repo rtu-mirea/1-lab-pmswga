@@ -15,6 +15,10 @@ public class UsersBase {
         this.users.put(user.getLogin(), user);
     }
 
+    public Map<String, User> getUsers() {
+        return this.users;
+    }
+
     public User getUser(String login) {
         return this.users.get(login);
     }

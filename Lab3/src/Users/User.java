@@ -41,4 +41,12 @@ public class User {
         return this.type;
     }
 
+    public boolean isAdmin() {
+        return this.type == UserType.USER_ADMIN;
+    }
+
+    public boolean isClient() {
+        return this.type == UserType.USER_CLIENT;
+    }
+
 }

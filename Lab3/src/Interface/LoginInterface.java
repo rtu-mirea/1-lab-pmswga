@@ -2,12 +2,12 @@ package Interface;
 
 import java.util.Scanner;
 
-public class EnterInterface extends AbstractInterface {
+public class LoginInterface {
 
     private String login;
     private String password;
 
-    public EnterInterface() {
+    public LoginInterface() {
         this.login    = "";
         this.password = "";
     }
@@ -20,21 +20,20 @@ public class EnterInterface extends AbstractInterface {
         return this.password;
     }
 
-    @Override
     public void view() {
-        Scanner input = new Scanner(System.in);
+        Scanner inputt = new Scanner(System.in);
 
         System.out.print("Enter login: ");
         while (this.login.isEmpty()) {
-            this.login = input.nextLine();
+            this.login = inputt.nextLine();
         }
 
         System.out.print("Enter password: ");
         while (this.password.isEmpty()) {
-            this.password = input.nextLine();
+            this.password = inputt.nextLine();
         }
 
-        input.close();
+        //inputt.close();
     }
 
 }
