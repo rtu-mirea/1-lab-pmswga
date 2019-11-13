@@ -4,6 +4,8 @@ import Users.User;
 import Users.UsersBase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class Totalizator {
@@ -11,7 +13,7 @@ public class Totalizator {
     private UsersBase usersBase;
     private ParlaysBase parlaysBase;
     private HorseBase horseBase;
-    private ArrayList<User> winners;
+    private Map<User, Double> winners;
     private int winHorseId;
 
     public Totalizator() {
@@ -19,7 +21,7 @@ public class Totalizator {
         this.parlaysBase = new ParlaysBase();
         this.horseBase = new HorseBase();
 
-        this.winners = new ArrayList<User>();
+        this.winners = new HashMap<User, Double>();
         this.winHorseId = 0;
     }
 
@@ -43,7 +45,7 @@ public class Totalizator {
         return this.horseBase.getHorseById(this.winHorseId+1);
     }
 
-    public ArrayList<User> getWinners() {
+    public Map<User, Double> getWinners() {
         return this.winners;
     }
 
@@ -53,10 +55,12 @@ public class Totalizator {
     }
 
     public void calculateMoney() {
+        Random rand = new Random();
+
         for (User user : this.usersBase.getUsers()) {
             for (Parlay parlay : this.parlaysBase.getParlaysByUser(user.getLogin())) {
                 if (parlay.getHorse().equals(this.horseBase.getHorseById(this.winHorseId+1).getName())) {
-                    this.winners.add(user);
+                    this.winners.put(user, parlay.getSum() * (rand.nextDouble() + 1));
                 }
             }
         }
