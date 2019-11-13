@@ -10,6 +10,10 @@ public class HorseBase {
         this.horses = new ArrayList<Horse>();
     }
 
+    public int getCountHorses() {
+        return this.horses.size();
+    }
+
     public Horse getHorseById(int id) {
         return this.horses.get(id-1);
     }

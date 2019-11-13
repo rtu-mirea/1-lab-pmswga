@@ -2,6 +2,7 @@
 import Totalizator.HorseBase;
 import Totalizator.Parlay;
 import Totalizator.ParlaysBase;
+import Totalizator.Totalizator;
 import Users.*;
 import Interface.*;
 
@@ -12,23 +13,20 @@ import java.util.Scanner;
 
 class Main {
 
-    static private UsersBase usersBase = new UsersBase();
+    static private Totalizator totalizator = new Totalizator();
     static private User currentUser = null;
 
-    static private ParlaysBase parlaysBase = new ParlaysBase();
-    static private HorseBase horseBase = new HorseBase();
-
     static private void fillUserList() {
-        usersBase.addUser(new User("admin", "admin", "admin", UserType.USER_ADMIN));
-        usersBase.addUser(new User("Sergey", "pmswga", "pass", UserType.USER_CLIENT));
-        usersBase.addUser(new User("Ivan", "walkman", "pass1", UserType.USER_CLIENT));
-        usersBase.addUser(new User("Aleen", "john wick", "pass2", UserType.USER_CLIENT));
-        usersBase.addUser(new User("Yuri", "cool boy", "pass3", UserType.USER_CLIENT));
-        usersBase.addUser(new User("Aleksandr", "man", "pass4", UserType.USER_CLIENT));
+        totalizator.getUsersBase().addUser(new User("admin", "admin", "admin", UserType.USER_ADMIN));
+        totalizator.getUsersBase().addUser(new User("Sergey", "pmswga", "pass", UserType.USER_CLIENT));
+        totalizator.getUsersBase().addUser(new User("Ivan", "walkman", "pass1", UserType.USER_CLIENT));
+        totalizator.getUsersBase().addUser(new User("Aleen", "john wick", "pass2", UserType.USER_CLIENT));
+        totalizator.getUsersBase().addUser(new User("Yuri", "cool boy", "pass3", UserType.USER_CLIENT));
+        totalizator.getUsersBase().addUser(new User("Aleksandr", "man", "pass4", UserType.USER_CLIENT));
     }
 
     static private void userListInterface() {
-        UserListInterface userListInterface = new UserListInterface(Main.usersBase);
+        UserListInterface userListInterface = new UserListInterface(Main.totalizator.getUsersBase());
         userListInterface.view();
     }
 
@@ -36,12 +34,12 @@ class Main {
         ParlayListInterface parlayListInterface = null;
 
         if (currentUser.isClient()) {
-            parlayListInterface = new ParlayListInterface(Main.parlaysBase.getParlaysByUser(currentUser.getLogin()));
+            parlayListInterface = new ParlayListInterface(totalizator.getParlaysBase().getParlaysByUser(currentUser.getLogin()));
             parlayListInterface.view();
         } else if (currentUser.isAdmin()) {
-            for (User user : usersBase.getUsers()) {
+            for (User user : totalizator.getUsersBase().getUsers()) {
 
-                ArrayList<Parlay> parlays = Main.parlaysBase.getParlaysByUser(user.getLogin());
+                ArrayList<Parlay> parlays = totalizator.getParlaysBase().getParlaysByUser(user.getLogin());
 
                 if (!parlays.isEmpty()) {
                     System.out.println("Parlays of user: " + user.getLogin());
@@ -56,7 +54,7 @@ class Main {
     }
 
     static private void horsesListInterface() {
-        HorseListInterface horseListInterface = new HorseListInterface(horseBase.getHorses());
+        HorseListInterface horseListInterface = new HorseListInterface(totalizator.getHorseBase().getHorses());
         horseListInterface.view();
     }
 
@@ -64,8 +62,8 @@ class Main {
         LoginInterface loginInterface = new LoginInterface();
         loginInterface.view();
 
-        if (usersBase.enter(loginInterface.getLogin(), loginInterface.getPassword())) {
-            currentUser = usersBase.getUser(loginInterface.getLogin());
+        if (totalizator.getUsersBase().enter(loginInterface.getLogin(), loginInterface.getPassword())) {
+            currentUser = totalizator.getUsersBase().getUser(loginInterface.getLogin());
             System.out.println("You are entered! Welcome, " + currentUser.getName());
         } else {
             // TODO: Реализовать интерфейс вывода ошибок
@@ -77,17 +75,17 @@ class Main {
         RegisterInterface registerInterface = new RegisterInterface();
         registerInterface.view();
 
-        usersBase.addUser(registerInterface.getRegisteredUser());
+        totalizator.getUsersBase().addUser(registerInterface.getRegisteredUser());
 
         System.out.println("User registered successfully!");
     }
 
     static private void addParlayInterface() {
-        if (!horseBase.getHorses().isEmpty()) {
-            AddParlayInterface addParlayInterface = new AddParlayInterface(horseBase.getHorses());
+        if (!totalizator.getHorseBase().getHorses().isEmpty()) {
+            AddParlayInterface addParlayInterface = new AddParlayInterface(totalizator.getHorseBase().getHorses());
             addParlayInterface.view();
 
-            parlaysBase.addParlay(currentUser.getLogin(), addParlayInterface.getAddedParlay());
+            totalizator.getParlaysBase().addParlay(currentUser.getLogin(), addParlayInterface.getAddedParlay());
 
             System.out.println("Parlay added successfully!");
         } else {
@@ -99,9 +97,16 @@ class Main {
         AddHorseInterface addHorseInterface = new AddHorseInterface();
         addHorseInterface.view();
 
-        horseBase.addHorse(addHorseInterface.getAddedHorse());
+        totalizator.getHorseBase().addHorse(addHorseInterface.getAddedHorse());
 
         System.out.println("Horse added successfully!");
+    }
+
+    static private void winnerListInterface() {
+        System.out.println("Win horse is " + totalizator.getWinHorse().getName());
+
+        WinnerListInterface winnerListInterface = new WinnerListInterface(totalizator.getWinners());
+        winnerListInterface.view();
     }
 
     static public void main(String args[]) {
@@ -181,7 +186,9 @@ class Main {
                 switch (command)
                 {
                     case 1: {
-
+                        totalizator.generateResults();
+                        totalizator.calculateMoney();
+                        Main.winnerListInterface();
                     } break;
                     case 2: {
                         Main.addHorseInterface();

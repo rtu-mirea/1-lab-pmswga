@@ -26,22 +26,11 @@ public class ParlaysBase {
         }
     }
 
-    public ArrayList<Parlay> getAllParlays() {
-        ArrayList<Parlay> parlays = new ArrayList<Parlay>();
-
-        for (String userLogin : this.parlays.keySet()) {
-
-            for (Parlay parlay : this.parlays.get(userLogin)) {
-                parlays.add(parlay);
-            }
-
-        }
-
-        return parlays;
+    public void clearParlays() {
+        this.parlays.clear();
     }
 
     public void addParlay(String username, Parlay parlay) {
-
         if (this.parlays.containsKey(username)) {
             this.parlays.get(username).add(parlay);
         } else {
