@@ -32,7 +32,7 @@ public class ParlayListInterface {
                 id++;
             }
 
-            System.out.println("+----+----------+-----------+");
+            System.out.println("+----+-----------+---------+");
         } else {
             System.out.print("List parlays is empty");
         }

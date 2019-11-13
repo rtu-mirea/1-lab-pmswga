@@ -83,12 +83,16 @@ class Main {
     }
 
     static private void addParlayInterface() {
-        AddParlayInterface addParlayInterface = new AddParlayInterface();
-        addParlayInterface.view();
+        if (!horseBase.getHorses().isEmpty()) {
+            AddParlayInterface addParlayInterface = new AddParlayInterface(horseBase.getHorses());
+            addParlayInterface.view();
 
-        parlaysBase.addParlay(currentUser.getLogin(), addParlayInterface.getAddedParlay());
+            parlaysBase.addParlay(currentUser.getLogin(), addParlayInterface.getAddedParlay());
 
-        System.out.println("Parlay added successfully!");
+            System.out.println("Parlay added successfully!");
+        } else {
+            System.out.println("Sorry, better luck next time");
+        }
     }
 
     static private void addHorseInterface() {
