@@ -66,7 +66,6 @@ class Main {
             currentUser = totalizator.getUsersBase().getUser(loginInterface.getLogin());
             System.out.println("You are entered! Welcome, " + currentUser.getName());
         } else {
-            // TODO: Реализовать интерфейс вывода ошибок
             System.out.println("You are not entered!");
         }
     }
@@ -80,6 +79,11 @@ class Main {
         System.out.println("User registered successfully!");
     }
 
+    static private void aboutRaceInterface() {
+        AboutRaceInterface aboutRaceInterface = new AboutRaceInterface(totalizator);
+        aboutRaceInterface.view();
+    }
+
     static private void addParlayInterface() {
         if (!totalizator.getHorseBase().getHorses().isEmpty()) {
             AddParlayInterface addParlayInterface = new AddParlayInterface(totalizator.getHorseBase().getHorses());
@@ -91,6 +95,15 @@ class Main {
         } else {
             System.out.println("Sorry, better luck next time");
         }
+    }
+
+    static private void setCoefficientInterface() {
+        SetCoefficientInterface setCoefficientInterface = new SetCoefficientInterface();
+        setCoefficientInterface.view();
+
+        totalizator.setCoefficient(setCoefficientInterface.getCoefficient());
+
+        System.out.println("Play coefficient set successfully!");
     }
 
     static private void addHorseInterface() {
@@ -130,11 +143,12 @@ class Main {
             } else if (Main.currentUser.isAdmin()) {
                 System.out.println("[User: " + currentUser.getName() + "]");
                 System.out.println("1. Start race");
-                System.out.println("2. Add horse");
-                System.out.println("3. List of parlays");
-                System.out.println("4. List of horses");
-                System.out.println("5. List of users");
-                System.out.println("6. Logout");
+                System.out.println("2. Set coefficient");
+                System.out.println("3. Add horse");
+                System.out.println("4. List of parlays");
+                System.out.println("5. List of horses");
+                System.out.println("6. List of users");
+                System.out.println("7. Logout");
             }
 
             if (input.hasNextInt()) {
@@ -163,7 +177,7 @@ class Main {
                 switch (command)
                 {
                     case 1: {
-                        //TODO: about race
+                        Main.aboutRaceInterface();
                     } break;
                     case 2: {
                         Main.addParlayInterface();
@@ -186,23 +200,31 @@ class Main {
                 switch (command)
                 {
                     case 1: {
-                        totalizator.generateResults();
-                        totalizator.calculateMoney();
-                        Main.winnerListInterface();
+                        if (totalizator.getCoefficient() != 0 && !totalizator.getHorseBase().getHorses().isEmpty()) {
+                            totalizator.generateResults();
+                            totalizator.calculateMoney();
+                            totalizator.clearParlays();
+                            Main.winnerListInterface();
+                        } else {
+                            System.out.println("You can't start race, because the horses list is empty and play coefficient equal 0 ");
+                        }
                     } break;
                     case 2: {
-                        Main.addHorseInterface();
+                        Main.setCoefficientInterface();
                     } break;
                     case 3: {
-                        Main.parlayListInterface();
+                        Main.addHorseInterface();
                     } break;
                     case 4: {
-                        Main.horsesListInterface();
+                        Main.parlayListInterface();
                     } break;
                     case 5: {
-                        Main.userListInterface();
+                        Main.horsesListInterface();
                     } break;
                     case 6: {
+                        Main.userListInterface();
+                    } break;
+                    case 7: {
                         System.out.println("Goodbye, " + currentUser.getName() + "!");
                         currentUser = null;
                     } break;

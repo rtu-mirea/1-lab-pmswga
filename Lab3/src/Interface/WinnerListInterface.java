@@ -9,9 +9,9 @@ import java.util.Map;
 
 public class WinnerListInterface {
 
-    private Map<User, Double> winners;
+    private Map<User, Integer> winners;
 
-    public WinnerListInterface(Map<User, Double> winners) {
+    public WinnerListInterface(Map<User, Integer> winners) {
         this.winners = winners;
     }
 
@@ -33,7 +33,7 @@ public class WinnerListInterface {
             id++;
         }
 
-        System.out.println("+----+-----------+");
+        System.out.println("+----+----------+---------+");
     }
 
 }
