@@ -82,37 +82,51 @@ public class Main {
     }
 
     private static void task3() {
+        // USA date format: MM/DD/YYYY
+        // RUS date format: DD.MM.YYYY
+
+        String text = FileReader.getText("dates.txt");
+
+        Task3 task3 = new Task3(text);
+
+        System.out.println("All correct dates (USA and RUS formats): ");
+        System.out.println(task3.getValidatedDates());
+
+        System.out.println("Replaced USA dates to RUS dates: ");
+        System.out.println(task3.usaDate2rusDate());
 
     }
 
     public static void main(String args[]) {
-        Scanner input = new Scanner(System.in);
+        Main.task3();
+        System.exit(0);
 
-        System.out.println("1. Task 1");
-        System.out.println("2. Task 2");
-        System.out.println("3. Task 3");
-        System.out.println("4. Exit");
-        System.out.print(":>");
-
-        try {
+        try (Scanner input = new Scanner(System.in)) {
+            System.out.println("1. Task 1");
+            System.out.println("2. Task 2");
+            System.out.println("3. Task 3");
+            System.out.println("4. Exit");
+            System.out.print(":>");
             switch (input.nextInt()) {
                 case 1: {
                     Main.task1();
-                } break;
+                }
+                break;
                 case 2: {
                     Main.task2();
-                } break;
+                }
+                break;
                 case 3: {
                     Main.task3();
-                } break;
+                }
+                break;
                 default: {
                     System.out.println("Input error, please try again");
-                } break;
+                }
+                break;
             }
         } catch (InputMismatchException e) {
             System.out.println(e.getMessage());
-        } finally {
-            input.close();
         }
     }
 
