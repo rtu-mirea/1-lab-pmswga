@@ -1,23 +1,30 @@
-package tasks.Task3;
+package Tasks.Task3;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/*!
+    1. Определите, что строка является корректной датой в русском и американском формате.
+    2. Дан текст. Замените все даты в американском формате, датами в русском формате.
+ */
+
 public class Task3 {
 
     private String text;
+    private Pattern universalDateFormat; // Consist regexp of RUS and USA date formats
+    private Pattern rusDateFormat; // Consist regexp of RUS date format
 
     public Task3(String text) {
         this.text = text;
+        this.universalDateFormat = Pattern.compile("((0[1-9]|1[0-2]))[\\/\\.](0[1-9]|1[0-2])[\\/\\.](\\d{4})");
+        this.rusDateFormat = Pattern.compile("((0[1-9]|1[0-2]))[\\/](0[1-9]|1[0-2])[\\/](\\d{4})");
     }
 
     public ArrayList<String> getValidatedDates() {
         ArrayList<String> dates = new ArrayList<String>();
 
-        Pattern dateFormat = Pattern.compile("((0[1-9]|1[0-2]))[\\/\\.](0[1-9]|1[0-2])[\\/\\.](\\d{4})");
-
-        Matcher DateMatcher = dateFormat.matcher(text);
+        Matcher DateMatcher = this.universalDateFormat.matcher(text);
         while (DateMatcher.find()) {
             dates.add(text.substring(DateMatcher.start(), DateMatcher.end()));
         }
@@ -28,9 +35,7 @@ public class Task3 {
     public ArrayList<String> usaDate2rusDate() {
         ArrayList<String> replacedDates = new ArrayList<String>();
 
-        Pattern dateFormat = Pattern.compile("((0[1-9]|1[0-2]))[\\/](0[1-9]|1[0-2])[\\/](\\d{4})");
-
-        Matcher DateMatcher = dateFormat.matcher(text);
+        Matcher DateMatcher = rusDateFormat.matcher(text);
         while (DateMatcher.find()) {
             StringBuilder formattedDate = new StringBuilder();
             String []date = text.substring(DateMatcher.start(), DateMatcher.end()).split("/");

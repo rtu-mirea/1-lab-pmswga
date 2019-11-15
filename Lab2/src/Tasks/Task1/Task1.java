@@ -1,10 +1,8 @@
-package tasks.Task1;
+package Tasks.Task1;
 
-import tasks.Sale;
+import Tasks.Sale;
 
-import java.lang.reflect.Array;
 import java.util.HashMap;
-import java.util.List;
 
 /*!
     Дан текст, который содержит информацию о продажах в магазине и о каждой продаже известно:
@@ -43,6 +41,11 @@ public class Task1 {
             }
         }
 
+        this.productNameToUpperCase();
+        this.formirateRating();
+    }
+
+    private void productNameToUpperCase() {
         for (Sale product : this.sales) {
             String productName = product.getProductName();
 
@@ -52,7 +55,9 @@ public class Task1 {
 
             product.setProductName(productName);
         }
+    }
 
+    private void formirateRating() {
         for (Sale product : this.sales) {
             String productName = product.getProductName();
 
@@ -62,8 +67,8 @@ public class Task1 {
                 this.rating.put(productName, this.rating.get(productName) + 1);
             }
         }
-
     }
+
 
     public Sale getSaleByID(int saleId) {
         return this.sales.get(saleId-1);

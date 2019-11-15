@@ -1,5 +1,6 @@
-import tasks.Task1.Task1;
-import tasks.Task3.Task3;
+import Tasks.Task1.Task1;
+import Tasks.Task2.Task2;
+import Tasks.Task3.Task3;
 import utils.FileReader;
 
 import java.util.*;
@@ -7,7 +8,6 @@ import java.util.*;
 /*!
     Вариант заданий №3
  */
-
 
 public class Main {
 
@@ -33,6 +33,7 @@ public class Main {
     }
 
     private static void task2() {
+        Task2 task2 = new Task2(FileReader.getText("sales.txt"));
 
     }
 
