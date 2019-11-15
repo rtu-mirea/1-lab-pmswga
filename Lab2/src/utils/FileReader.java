@@ -1,4 +1,4 @@
-package tasks;
+package utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +10,7 @@ public class FileReader {
 
     static public String getText(String filename) {
         File file = new File(".", filename);
-        String text = "";
+        StringBuilder text = new StringBuilder();
 
         try {
             if (file.exists()) {
@@ -18,7 +18,7 @@ public class FileReader {
                     List<String> lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
 
                     for (String line : lines) {
-                        text = text.concat(line);
+                        text.append(line);
                     }
                 }
             } else {
@@ -28,7 +28,7 @@ public class FileReader {
             System.out.println(e.getMessage());
         }
 
-        return text;
+        return text.toString();
     }
 
 }

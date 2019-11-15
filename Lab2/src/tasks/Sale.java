@@ -9,15 +9,15 @@ public class Sale {
         this.price = price;
     }
 
-    void setProductName(String newProductName) {
+    public void setProductName(String newProductName) {
         this.productName = newProductName;
     }
 
-    String getProductName() {
+    public String getProductName() {
         return this.productName;
     }
 
-    Integer getPrice() {
+    public Integer getPrice() {
         return this.price;
     }
 

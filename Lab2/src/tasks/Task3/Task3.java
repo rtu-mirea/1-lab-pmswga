@@ -1,4 +1,4 @@
-package tasks;
+package tasks.Task3;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -32,16 +32,16 @@ public class Task3 {
 
         Matcher DateMatcher = dateFormat.matcher(text);
         while (DateMatcher.find()) {
-            StringBuilder formatedDate = new StringBuilder();
+            StringBuilder formattedDate = new StringBuilder();
             String []date = text.substring(DateMatcher.start(), DateMatcher.end()).split("/");
 
-            formatedDate.append(date[1]);
-            formatedDate.append(".");
-            formatedDate.append(date[0]);
-            formatedDate.append(".");
-            formatedDate.append(date[2]);
+            formattedDate.append(date[1]);
+            formattedDate.append(".");
+            formattedDate.append(date[0]);
+            formattedDate.append(".");
+            formattedDate.append(date[2]);
 
-            replacedDates.add(formatedDate.toString());
+            replacedDates.add(formattedDate.toString());
         }
 
         return replacedDates;

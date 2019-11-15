@@ -1,4 +1,6 @@
-package tasks;
+package tasks.Task1;
+
+import tasks.Sale;
 
 import java.lang.reflect.Array;
 import java.util.HashMap;
@@ -45,8 +47,7 @@ public class Task1 {
             String productName = product.getProductName();
 
             if (!productName.isEmpty()) {
-                String letter = String.valueOf(productName.charAt(0)).toUpperCase();
-                productName = letter + productName.substring(1);
+                productName = String.valueOf(productName.charAt(0)).toUpperCase() + productName.substring(1);
             }
 
             product.setProductName(productName);
