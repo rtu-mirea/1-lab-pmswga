@@ -1,14 +1,12 @@
 
-import Totalizator.HorseBase;
-import Totalizator.Parlay;
-import Totalizator.ParlaysBase;
-import Totalizator.Totalizator;
-import Users.*;
-import Interface.*;
+import Controller.*;
+import Model.Totalizator.Parlay;
+import Model.Totalizator.Totalizator;
+import Model.Users.User;
+import Model.Users.UserType;
+import View.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Scanner;
 
 class Main {
@@ -26,16 +24,16 @@ class Main {
     }
 
     static private void userListInterface() {
-        UserListInterface userListInterface = new UserListInterface(Main.totalizator.getUsersBase());
-        userListInterface.view();
+        UserListView userListView = new UserListView(Main.totalizator.getUsersBase());
+        userListView.view();
     }
 
     static private void parlayListInterface() {
-        ParlayListInterface parlayListInterface = null;
+        ParlayListView parlayListView = null;
 
         if (currentUser.isClient()) {
-            parlayListInterface = new ParlayListInterface(totalizator.getParlaysBase().getParlaysByUser(currentUser.getLogin()));
-            parlayListInterface.view();
+            parlayListView = new ParlayListView(totalizator.getParlaysBase().getParlaysByUser(currentUser.getLogin()));
+            parlayListView.view();
         } else if (currentUser.isAdmin()) {
             for (User user : totalizator.getUsersBase().getUsers()) {
 
@@ -43,8 +41,8 @@ class Main {
 
                 if (!parlays.isEmpty()) {
                     System.out.println("Parlays of user: " + user.getLogin());
-                    parlayListInterface = new ParlayListInterface(parlays);
-                    parlayListInterface.view();
+                    parlayListView = new ParlayListView(parlays);
+                    parlayListView.view();
                 } else {
                     System.out.println("Parlays list is empty for user: " + user.getLogin());
                 }
@@ -54,16 +52,16 @@ class Main {
     }
 
     static private void horsesListInterface() {
-        HorseListInterface horseListInterface = new HorseListInterface(totalizator.getHorseBase().getHorses());
-        horseListInterface.view();
+        HorseListView horseListView = new HorseListView(totalizator.getHorseBase().getHorses());
+        horseListView.view();
     }
 
     static private void enterInterface() {
-        LoginInterface loginInterface = new LoginInterface();
-        loginInterface.view();
+        LoginController loginController = new LoginController();
+        loginController.view();
 
-        if (totalizator.getUsersBase().enter(loginInterface.getLogin(), loginInterface.getPassword())) {
-            currentUser = totalizator.getUsersBase().getUser(loginInterface.getLogin());
+        if (totalizator.getUsersBase().enter(loginController.getLogin(), loginController.getPassword())) {
+            currentUser = totalizator.getUsersBase().getUser(loginController.getLogin());
             System.out.println("You are entered! Welcome, " + currentUser.getName());
         } else {
             System.out.println("You are not entered!");
@@ -71,25 +69,25 @@ class Main {
     }
 
     static private void registerInterface() {
-        RegisterInterface registerInterface = new RegisterInterface();
-        registerInterface.view();
+        RegisterController registerController = new RegisterController();
+        registerController.view();
 
-        totalizator.getUsersBase().addUser(registerInterface.getRegisteredUser());
+        totalizator.getUsersBase().addUser(registerController.getRegisteredUser());
 
         System.out.println("User registered successfully!");
     }
 
     static private void aboutRaceInterface() {
-        AboutRaceInterface aboutRaceInterface = new AboutRaceInterface(totalizator);
-        aboutRaceInterface.view();
+        AboutRaceView aboutRaceView = new AboutRaceView(totalizator);
+        aboutRaceView.view();
     }
 
     static private void addParlayInterface() {
         if (!totalizator.getHorseBase().getHorses().isEmpty()) {
-            AddParlayInterface addParlayInterface = new AddParlayInterface(totalizator.getHorseBase().getHorses());
-            addParlayInterface.view();
+            AddParlayController addParlayController = new AddParlayController(totalizator.getHorseBase().getHorses());
+            addParlayController.view();
 
-            totalizator.getParlaysBase().addParlay(currentUser.getLogin(), addParlayInterface.getAddedParlay());
+            totalizator.getParlaysBase().addParlay(currentUser.getLogin(), addParlayController.getAddedParlay());
 
             System.out.println("Parlay added successfully!");
         } else {
@@ -98,19 +96,19 @@ class Main {
     }
 
     static private void setCoefficientInterface() {
-        SetCoefficientInterface setCoefficientInterface = new SetCoefficientInterface();
-        setCoefficientInterface.view();
+        SetCoefficientController setCoefficientController = new SetCoefficientController();
+        setCoefficientController.view();
 
-        totalizator.setCoefficient(setCoefficientInterface.getCoefficient());
+        totalizator.setCoefficient(setCoefficientController.getCoefficient());
 
         System.out.println("Play coefficient set successfully!");
     }
 
     static private void addHorseInterface() {
-        AddHorseInterface addHorseInterface = new AddHorseInterface();
-        addHorseInterface.view();
+        AddHorseController addHorseController = new AddHorseController();
+        addHorseController.view();
 
-        totalizator.getHorseBase().addHorse(addHorseInterface.getAddedHorse());
+        totalizator.getHorseBase().addHorse(addHorseController.getAddedHorse());
 
         System.out.println("Horse added successfully!");
     }
@@ -118,8 +116,8 @@ class Main {
     static private void winnerListInterface() {
         System.out.println("Win horse is " + totalizator.getWinHorse().getName());
 
-        WinnerListInterface winnerListInterface = new WinnerListInterface(totalizator.getWinners());
-        winnerListInterface.view();
+        WinnerListView winnerListView = new WinnerListView(totalizator.getWinners());
+        winnerListView.view();
     }
 
     static public void main(String args[]) {
