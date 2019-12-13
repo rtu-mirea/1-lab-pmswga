@@ -169,11 +169,9 @@ class Main {
                             } break;
                             case 6: {
                                 contactListFile.save();
-
-
                             } break;
                             case 7: {
-
+                                contactListFile.load();
                             } break;
                             case 8: {
                                 isExit = true;
@@ -184,7 +182,7 @@ class Main {
                 case 5: {
 
                 } break;
-                case 7: {
+                case 6: {
                     input.close();
                     System.exit(0);
                 } break;
