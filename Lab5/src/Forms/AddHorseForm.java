@@ -1,5 +1,8 @@
 package Forms;
 
+import Model.Totalizator.Horse;
+import Model.TotalizatorSingleton;
+
 import javax.swing.*;
 
 public class AddHorseForm extends JFrame {
@@ -12,6 +15,8 @@ public class AddHorseForm extends JFrame {
     private JButton addButton;
 
     public AddHorseForm() {
+        setSize(350, 100);
+        setResizable(false);
 
         Box horseNameBox = Box.createHorizontalBox();
         horseNameLabel = new JLabel("Имя лошади:");
@@ -23,6 +28,9 @@ public class AddHorseForm extends JFrame {
         Box buttonBox = Box.createHorizontalBox();
         cancelButton = new JButton("Отмена");
         addButton = new JButton("Добавить");
+        addButton.addActionListener(e -> {
+            TotalizatorSingleton.get().getHorseBase().addHorse(new Horse(horseNameField.getText()));
+        });
 
         buttonBox.add(cancelButton);
         buttonBox.add(addButton);
@@ -32,7 +40,6 @@ public class AddHorseForm extends JFrame {
         mainBox.add(buttonBox);
 
         setContentPane(mainBox);
-        setVisible(true);
     }
 
 }

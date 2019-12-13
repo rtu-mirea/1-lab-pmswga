@@ -1,16 +1,19 @@
 package Forms;
+import Model.Totalizator.Totalizator;
+import Model.Users.User;
+
 import javax.swing.*;
+import Controllers.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
+
 public class LoginForm extends JFrame {
 
-
-    private Box mainBox;
-    private Box loginBox;
-    private Box passBox;
-    private Box buttonBox;
+    static private Totalizator totalizator = new Totalizator();
+    static private User currentUser = null;
 
     private JLabel loginLabel;
     private JLabel passLabel;
@@ -19,53 +22,60 @@ public class LoginForm extends JFrame {
     private JTextField passField;
 
     private JButton exitButton;
+    private JButton registerButton;
     private JButton loginButton;
 
     public LoginForm() {
         this.setTitle("Вход в систему");
-        this.setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setResizable(false);
+        setSize(350, 100);
 
+        Box loginBox = Box.createHorizontalBox();
         loginLabel = new JLabel("Логин:");
         loginField = new JTextField(15);
-        loginBox = Box.createHorizontalBox();
+
         loginBox.add(loginLabel);
         loginBox.add(Box.createHorizontalStrut(12));
         loginBox.add(loginField);
 
 
+        Box passBox = Box.createHorizontalBox();
         passLabel = new JLabel("Пароль:");
         passField = new JPasswordField(15);
-        passBox = Box.createHorizontalBox();
+
         passBox.add(passLabel);
         passBox.add(Box.createHorizontalStrut(12));
         passBox.add(passField);
 
         exitButton = new JButton("Выход");
         exitButton.addActionListener(e -> System.exit(0));
+
+        registerButton = new JButton("Регистрация");
+        registerButton.addActionListener(new FormController("RegForm", this));
+
         loginButton = new JButton("Войти");
+        loginButton.addActionListener(new FormController("MainForm", this));
 
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (loginField.getText().equals("admin") && passField.getText().equals("admin")) {
-                    System.out.print("You are admin");
-                }
-            }
-        });
-
-
-        buttonBox = Box.createHorizontalBox();
+        Box buttonBox = Box.createHorizontalBox();
         buttonBox.add(exitButton);
+        buttonBox.add(registerButton);
         buttonBox.add(loginButton);
 
-        mainBox = Box.createVerticalBox();
+        Box mainBox = Box.createVerticalBox();
         mainBox.add(loginBox);
         mainBox.add(passBox);
         mainBox.add(buttonBox);
 
         setContentPane(mainBox);
-        this.setVisible(true);
     }
 
 
+    public JTextField getLoginField() {
+        return this.loginField;
+    }
+
+    public JTextField getPassField() {
+        return passField;
+    }
 }

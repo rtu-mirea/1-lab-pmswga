@@ -16,7 +16,6 @@ public class AddParlayForm extends JFrame {
 
     public AddParlayForm() {
         setTitle("Добавить ставку");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800, 600);
 
         JPanel horseTablePanel = new JPanel();
@@ -46,7 +45,6 @@ public class AddParlayForm extends JFrame {
         mainBox.add(parlaySumBox);
 
         setContentPane(mainBox);
-        setVisible(true);
     }
 
 }

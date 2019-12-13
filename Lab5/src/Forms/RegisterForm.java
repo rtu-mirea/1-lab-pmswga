@@ -1,6 +1,11 @@
 package Forms;
 
+import Model.TotalizatorSingleton;
+import Model.Users.User;
+import Model.Users.UserType;
+
 import javax.swing.*;
+import java.util.Arrays;
 
 public class RegisterForm extends JFrame {
 
@@ -16,7 +21,6 @@ public class RegisterForm extends JFrame {
     private JButton cancelButton;
 
     public RegisterForm() {
-        setVisible(true);
         setSize(640, 480);
         setTitle("Регистрация пользователя");
 
@@ -44,6 +48,14 @@ public class RegisterForm extends JFrame {
         Box buttonBox = Box.createHorizontalBox();
         cancelButton = new JButton("Отмена");
         registerButton = new JButton("Зарегистрироваться");
+        registerButton.addActionListener(e -> {
+            TotalizatorSingleton.get().getUsersBase().addUser(new User(
+                    nameField.getText(),
+                    loginField.getText(),
+                    Arrays.toString(passField.getPassword()),
+                    UserType.USER_CLIENT
+            ));
+        });
 
         buttonBox.add(cancelButton);
         buttonBox.add(registerButton);

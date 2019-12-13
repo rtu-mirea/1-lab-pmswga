@@ -1,14 +1,13 @@
 import Forms.*;
-import Forms.View.AboutRaceForm;
+import Model.TotalizatorSingleton;
 
 public class Main {
 
-
-
     static public void main(String []args) {
-        AboutRaceForm aboutRaceForm = new AboutRaceForm();
+        LoginForm loginForm = new LoginForm();
+        loginForm.setVisible(true);
 
-
+        System.out.println(TotalizatorSingleton.get().getUsersBase().getUsers().size());
     }
 
 }

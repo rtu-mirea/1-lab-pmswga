@@ -1,6 +1,12 @@
 package Forms.View;
 
+import Model.Totalizator.Totalizator;
+import Model.TotalizatorSingleton;
+
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+
+
 
 public class AboutRaceForm extends JFrame {
 
@@ -14,15 +20,17 @@ public class AboutRaceForm extends JFrame {
         setSize(640, 480);
 
         Box playCoefficientBox = Box.createHorizontalBox();
-        playCoefficientLabel = new JLabel();
+        playCoefficientLabel = new JLabel("Игровой коэффициент:");
         playCoefficientField = new JTextField();
+        this.playCoefficientField.setText(TotalizatorSingleton.get().getCoefficient().toString());
 
         playCoefficientBox.add(playCoefficientLabel);
         playCoefficientBox.add(playCoefficientField);
 
         JPanel horseTablePanel = new JPanel();
         horseTablePanel.setBorder(BorderFactory.createTitledBorder("Список лошадей"));
-        horseTable = new JTable(10, 2);
+        String []columns = {"Id", "Name"};
+        horseTable = new JTable(TotalizatorSingleton.get().getHorseBase().toStringArray(), columns);
 
         horseTablePanel.add(horseTable);
 
@@ -31,7 +39,5 @@ public class AboutRaceForm extends JFrame {
         mainBox.add(horseTablePanel);
 
         setContentPane(mainBox);
-        setVisible(true);
     }
-
 }
