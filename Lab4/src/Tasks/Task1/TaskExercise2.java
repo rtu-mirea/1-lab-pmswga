@@ -2,11 +2,11 @@ package Tasks.Task1;
 import java.io.File;
 import java.io.IOException;
 
-public class Exercise2 {
+public class TaskExercise2 {
 
     private File file;
 
-    public Exercise2() {
+    public TaskExercise2() {
 
     }
 

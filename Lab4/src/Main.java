@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.Date;
 import java.util.Scanner;
 
 import Tasks.Task1.*;
@@ -11,9 +10,9 @@ import Tasks.Task2.ContactRecord;
 
 class Main {
 
-    static private Exercise1 exercise1;
-    static private Exercise2 exercise2;
-    static private Exercise3 exercise3;
+    static private TaskExercise1 taskExercise1;
+    static private TaskExercise2 taskExercise2;
+    static private TaskExercise3 taskExercise3;
     static private ContactList contactList;
 
     static private void showMenu() {
@@ -21,8 +20,10 @@ class Main {
         System.out.println("2. Task 1/Exercise 2");
         System.out.println("3. Task 1/Exercise 3");
         System.out.println("4. Task 2");
-        System.out.println("5. Task 3");
-        System.out.println("6. Exit");
+        System.out.println("5. Task 3/Exercise 1");
+        System.out.println("6. Task 3/Exercise 2");
+        System.out.println("7. Task 3/Exercise 3");
+        System.out.println("8. Exit");
     }
 
     static private void showTask2Menu() {
@@ -45,9 +46,9 @@ class Main {
     }
 
     static public void main(String []args) throws IOException {
-        exercise1 = new Exercise1();
-        exercise2 = new Exercise2();
-        exercise3 = new Exercise3();
+        taskExercise1 = new TaskExercise1();
+        taskExercise2 = new TaskExercise2();
+        taskExercise3 = new TaskExercise3();
 
         contactList = new ContactList();
         Main.createContacts();
@@ -66,31 +67,31 @@ class Main {
             switch (input.nextInt()) {
                 case 1: {
                     System.out.println();
-                    System.out.println("MyFile 1 created? " + exercise1.createMyFile1());
+                    System.out.println("MyFile 1 created? " + taskExercise1.createMyFile1());
                     System.out.println();
-                    System.out.println("MyFile 2 created? " + exercise1.createMyFile2());
+                    System.out.println("MyFile 2 created? " + taskExercise1.createMyFile2());
                     System.out.println();
-                    System.out.println("MyFile 3 created? " + exercise1.createMyFile3());
+                    System.out.println("MyFile 3 created? " + taskExercise1.createMyFile3());
                     System.out.println();
-                    System.out.println("MyFolder created? " + exercise1.createFolder());
+                    System.out.println("MyFolder created? " + taskExercise1.createFolder());
                 } break;
                 case 2: {
                     System.out.println();
-                    exercise2.checkFile("out/MyFile3.txt");
+                    taskExercise2.checkFile("out/MyFile3.txt");
                     System.out.println();
-                    exercise2.checkFolder("MyFolder");
+                    taskExercise2.checkFolder("MyFolder");
                     System.out.println();
-                    System.out.println("MyFile 1 exists? " + exercise2.checkMyFile1());
+                    System.out.println("MyFile 1 exists? " + taskExercise2.checkMyFile1());
                 } break;
                 case 3: {
                     System.out.println();
-                    exercise3.createNewFolder("NewFolder");
+                    taskExercise3.createNewFolder("NewFolder");
                     System.out.println();
-                    exercise3.viewFiles();
+                    taskExercise3.viewFiles();
                     System.out.println();
-                    exercise3.viewFolders();
+                    taskExercise3.viewFolders();
                     System.out.println();
-                    exercise3.removeAllCreatedObjects();
+                    taskExercise3.removeAllCreatedObjects();
                     System.out.println("All created files and folders was removed");
                 } break;
                 case 4: {
@@ -180,7 +181,8 @@ class Main {
                     }
                 } break;
                 case 5: {
-
+                    Tasks.Task3.TaskExercise1 taskExercise11 = new Tasks.Task3.TaskExercise1();
+                    taskExercise11.run();
                 } break;
                 case 6: {
                     input.close();

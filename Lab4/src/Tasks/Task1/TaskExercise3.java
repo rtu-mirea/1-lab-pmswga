@@ -2,11 +2,11 @@ package Tasks.Task1;
 import java.io.File;
 import java.util.Objects;
 
-public class Exercise3 {
+public class TaskExercise3 {
 
     private File file;
 
-    public Exercise3() {
+    public TaskExercise3() {
 
     }
 
